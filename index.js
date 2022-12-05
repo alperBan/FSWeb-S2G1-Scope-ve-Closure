@@ -18,7 +18,7 @@
 function ilkiniDon(stringArray, callback) {
   return callback(stringArray[0])
 }
-console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin+metin}));
+console.log('örnek görev:', ilkiniDon(['sa','as'],function(metin){return metin+metin}));
 
 // Başlangıç Challenge'ı Sonu
 
@@ -64,11 +64,16 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
+function takimSkoru(){
+  let skor = Math.floor(Math.random()*(25-10+1)+10 )
+  return skor;
     /*Kodunuzu buraya yazınız*/
 }
 
-
+/*for (let i =0; i<100; i++){
+  console.log(takimSkoru());
+}
+*/
 
 
 /* Görev 3: macSonucu() 
@@ -86,14 +91,18 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(callbackFunction,ceyrekSayisi){
+  let EvSahibi = 0 ;
+  let KonukTakim = 0;
+  for(let ceyrek=1 ; ceyrek <= ceyrekSayisi; ceyrek++){
+    EvSahibi += callbackFunction();
+    KonukTakim += callbackFunction();
+  }
+  let finalSkor = {};
+  finalSkor.EvSahibi = EvSahibi;
+  finalSkor.KonukTakim = KonukTakim;
+  return finalSkor;
 }
-
-
-
-
-
 
 /* Zorlayıcı Görev 4: periyotSkoru()
 Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
@@ -109,11 +118,13 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-
+function periyotSkoru(callbackFunction) {
+  let score = {};
+  score.EvSahibi += callbackFunction();
+  score["KonukTakim"] = callbackFunction();
+  return score;
 }
-
+console.log(periyotSkoru(takimSkoru));
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
 Aşağıdaki skorTabelasi() fonksiyonunu kullanarak aşağıdakileri yapınız:
@@ -146,10 +157,24 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function skorTabelasi(periyotSkoru,takimSkoru,ceyrekSayisi) {
+  const skorlar = [];
+  for (let i = 1 ; i < ceyrekSayisi; i++){
+    const EvSahibi = 0;
+    const KonukTakim = 0;
+    const skorlar = [];
+    for (let i = 1; i<= ceyrekSayisi; i++){
+    const periyotSonucu = i+"Periyot : Ev Sahini" + EvSahibi+ "- Konuk Takım" + KonukTakim;
+    EvSahibi += periyot.EvSahibi;
+    KonukTakim += periyot.KonukTakim;
+    skorlar.push(periyotSonucu);
+    
+  }
+  const macSonucu = "Maç Sonucu : Ev Sahibi"+EvSahibi+" Konuk Takım " +KonukTakim;
+  return skorlar;
 }
-
+}
+console.log(skorTabelasi(periyotSkoru,takimSkoru,4))
 
 
 
